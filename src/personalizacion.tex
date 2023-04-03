@@ -10,6 +10,11 @@
 \providecommand{\H}{\mathcal{H}}
 \providecommand{\Im}[1]{Im(#1)}
 \providecommand{\Re}[1]{Re(#1)}
+\let\oldforall\forall
+\renewcommand{\forall}{\oldforall\,}
+\let\oldexists\exists
+\renewcommand{\exists}{\oldexists\,}
+\newcommand{\existsUnique}{\oldexists!\,}
 \providecommand{\conjugate}[1]{\bar{#1}}
 \providecommand{\pescalar}[2]{\langle #1,#2 \rangle}
 \providecommand{\braket}[2]{\left\langle#1\mid#2\right\rangle}
@@ -17,6 +22,7 @@
 \providecommand{\ket}[1]{\left\lvert#1\right\rangle}
 \providecommand{\ketbra}[2]{\left\lvert#1\right\rangle\!\left\langle#2\right\rvert}
 \providecommand{\so}{\Rightarrow}
+\renewcommand{\iff}{\Leftrightarrow}
 \providecommand{\by}[1]{\overset{\fbox{\tiny #1}}{=}}
 \providecommand{\byref}[1]{\overset{\fbox{\tiny\ref{#1}}}{=}}
 \providecommand{\maps}[3]{#1:#2\longrightarrow #3}
@@ -68,3 +74,5 @@
 \providecommand{\pull}[1]{\stackrel{\hookleftarrow}{#1}}
 \providecommand{\lowerInt}[1]{\lfloor #1 \rfloor}
 \providecommand{\upperInt}[1]{\lceil #1 \rceil}
+\providecommand{\mas}{\oplus}
+\providecommand{\por}{\otimes}
