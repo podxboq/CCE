@@ -53,25 +53,6 @@ Sobre $\Z_2^n$ se define las dos siguientes operaciones: $\forall x=\palabraG, y
 	Con el mismo desarrollo que arriba se tiene que $d(x_i, x_j)-1\leq d(y_i, y_j)\leq d(x_i, x_j)$ y así sólo falta comprobar que $d(y_l, y_k) = d(x_l, x_k)-1=d+1-1=d$.
 \end{proof}
 
-\begin{lemma}
-	Sea $n\in\N$ par, $A_2(n+1, d)=2A_2(n, d)$?.
-\end{lemma}
-\begin{proof}
-	Denotemos por $M=A_2(n, d)$ y $M'=A_2(n+1, d)$.
-	Dado $C=\set{x_1, \dots, x_M}$ un $(n, M, d)$-código binario, donde $x_i=x_{i1}\cdots x_{in}\in C$ podemos construir $C'=\set{y_1,\dots, y_M, y'_1,\dots, y'_M}$ definiendo
-	\begin{align*}
-		y_i&= x_{i1}\cdots x_{in}0\\
-		y'_i&=x_{i1}\dots x_{in}1
-	\end{align*}
-	Es fácil comprobar que
-	\begin{align*}
-		d(y_i, y_j) &= d(x_i, x_j)\\
-		d(y'_i, y'_j) &= d(x_i, x_j)\\
-		d(y_i, y'_j) &= d(x_i, x_j)+1\\
-	\end{align*}
-	Por lo tanto $2M\leq M'$.
-\end{proof}
-
 \begin{theorem}[Sphere-packing o Hamming bound]
 	Un $(q, n, M, 2t+1)$-código satisface $M|B(0, t)|\leq 2^n$.
 \end{theorem}
