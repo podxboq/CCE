@@ -1,0 +1,59 @@
+\section{Codificando y decodificando con códigos lineales}
+Sea $C$ un $[q, n, k, d]$-código lineal con matriz generador $G$, todo elemento $x=\palabraG\in C$ se puede poner de la forma $x=yG$ para algún $y\in\Z_q^k$, podemos identificar cada palabra de código de $C$ con un elemento de $\Z_q^k$ y obviamente al revés también, por la propia definición de generador, podemos considerar un isomorfismo entre $C$ y $\Z_q^k$.
+
+\begin{definition}
+	Sea $C$ un $[q, n, k, d]$-código lineal con matriz generador $G$, llamaremos \define{decodificación}{decodificacion} de $C$ al isomorfismo $\maps{d}{Z_q^k}{C}$ definido por $d(y)=yG$.\ Al isomorfismo inverso lo llamaremos \define{codificación}{codificación} de $C$.
+\end{definition}
+
+\subsection{Codificación}
+Vamos a definir un tipo muy especial de codificación muy usado en ?
+
+Mediante las operaciones R1, R2, R3, C1 y C2 podemos transformar al matriz generador $G$ en otra equivalente de la forma $[I_k|G']$ donde $G'\in M_{k\times (n-k)}(\Z_q)$, y con esta matriz observemos que dado $x=\palabraG\in C$ existe $y=\palabraN{k}$ tal que $x=y[I_k|G']$ y por lo tanto
+\begin{align*}
+	x_i &= \sum_{j=1}^k y_j [I_k|G']_{jk}=\begin{cases}
+		                                     \sum\limits_{j=1}^k y_j (I_k)_{jk}=y_k \text{ si $1\leq i \leq k$} \\
+		                                     \sum\limits_{j=1}^k y_j G'_{jk} \text{ si $i > k$}
+	\end{cases}
+\end{align*}
+Obtenemos así que $\forall x\in C\ \exists y\in\Z_q^k$ de tal forma que $x=yx'$ donde $x'\in\Z_q^{n-k}$.\ Llamamos a $x'$ \define{dígitos de control}{digitos-control} y nos añade una protección adicional ante fallos en la codificación.
+
+\begin{example}
+	Siguiendo con el ejemplo~\ref{ex:matriz-generador}, es sencillo encontrar que una matriz generador de $C$ es
+	\[
+		G=\begin{pmatrix*}
+				1&0&0&0&1&0&1\\
+				0&1&0&0&1&1&1\\
+				0&0&1&0&1&1&0\\
+				0&0&0&1&0&1&1
+		\end{pmatrix*}
+	\]
+	Así que el mensaje $x=1110$ se codifica en la palabra de código $x=1110100$.
+\end{example}
+
+\subsection{Decodificación}
+Recordemos que en el primer capítulo ya se habló que al recibir un mensaje, la palabra recibida puede no estar en el código $C$ y por tanto, hay que averiguar si el error producido era recuperable y que esta situación se daba cuando la distancia de la palabra recibida a $C$ era menor o igual al radio interior de $C$.
+
+Cuando trabajamos con código lineales, si $x\in C$ es la palabra de código enviada y $\push{x}$ la palabra recibida, tenemos que
+
+\[
+	d(\push{x}, C) = \min_{y\in C}\set{d(\push{x}, y)}= \min_{y\in C}\set{w(\push{x}- y)}=w(\push{x}-C)
+\]
+Ahora, como $C$ es un subespacio vectorial, $(\push{x}-C)\cap C=\emptyset$ aunque observemos que si $\push{x}\not\in C$ entonces $\push{x}-C$ no es un subespacio vectorial pues $\logical{0}{n}\not\in \push{x}-C$.
+
+Sin embargo, los conjuntos $y-C$ o de forma equivalente $y+C$ para ciertos elementos $y\in V(q,n)$ juegan un papel muy importante pues podemos descomponer el espacio vectorial en una unión disjunta de conjuntos de este formato, es decir, tenemos el siguiente resultado
+
+\begin{lemma}
+Sea $C$ un $[q, n, k, d]$-código lineal.\ Existen $a_1, \dots, a_s$ elementos de $V(q, k)$ donde $s=q^{n-k}$ tal que
+	\[
+		V(n, q) = (a_1+C)\cup\dots\cup (a_s+C)
+	\]
+\end{lemma}
+
+Todos los conjuntos de la forma $x+C$ tiene exactamente los mismos elementos que $C$ que tiene $q^k$ elementos, dados dos elementos $x,y\in V(q,n)$ o bien $x+C=y+C$ o $(x+C)\cap (y+C)=\emptyset$, por lo tanto podemos dividir $V(q, n)$ en $q^{n-k}$ conjuntos distintos y disjuntos, donde además uno de estos conjuntos es el propio $C$.
+
+Esta división de $V(q, n)$ nos ayuda a encontrar errores en las palabras recibidas y a localizar la palabra código más cercana, sin más que tener almacenada una matriz $A=(a_{ij})\in M_{q^n\times q^n}(V(q, n))$ definido por
+\[
+	a_{ij}=a_i+x_j
+\]
+
+Pero este método es muy costoso en almacenamiento y tiempo, y como veremos en los siguientes capítulos hay mejores métodos.
